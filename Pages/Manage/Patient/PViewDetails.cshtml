@@ -1,0 +1,129 @@
+﻿@page
+@model Capstonep2.Pages.Manage.Patient.PViewDetailsModel
+@{
+}
+<a href="~/manage/patient/Dashboard?" class="btn btn-info">
+    <i class="fa fa-pencil">Back</i>
+</a>
+<h1 class="text-center">APPOINTMENT DETAILS</h1>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-autos">
+            <div class="card">
+                <h2>Patient</h2>
+
+                <div class="card-body bg-mustardlite">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Name:</th>
+                            <td>@ViewData["firstname"] @ViewData["middlename"] @ViewData["lastname"]</td>
+                        </tr>
+                        <tr>
+                            <th>Gender:</th>
+                            <td>@ViewData["gender"]</td>
+                        </tr>
+                        <tr>
+                            <th>Birthdate:</th>
+                            <td>@ViewData["birthdate"]</td>
+                        </tr>
+                        <tr>
+                            <th>Address:</th>
+                            <td>@ViewData["address"]</td>
+                        </tr>
+                    </table>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="card">
+        <h2> Details</h2>
+        <div class="card-body bg-mustardlite">
+            <div class="row">
+                <label> Date And Time :</label>
+            </div>
+
+            <div class="row">
+                <label>Status:</label>
+            </div>
+            <div class="row">
+                <label>Symptoms:</label>
+            </div>
+            <div class="row">
+                <label>Purpose Of Visit:</label>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="card">
+        <h2>Consultation</h2>
+        <div class="card-body bg-mustardlite">
+            <div class="row">
+                <label>Findings:</label>
+            </div>
+            <div class="row">
+                <label>Descriptions:</label>
+            </div>
+            <div class="row">
+                <label>Prescription:</label>
+            </div>
+            <div class="row">
+                <label>Description:</label>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="container">
+
+    <a href="~/manage/patient/Editappt?" class="btn btn-primary">
+        <i class="fa fa-pencil">Edit Appointment </i>
+    </a>
+
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancel">
+        <i class="fa fa-pencil">Cancel Appointment</i>
+    </button>
+
+    <div class="modal fade" id="cancel" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Cancel Appoinment</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" />
+                </div>
+
+                <div class="modal-body bg-mustardlite">
+                    <p>Are you sure you want to cancel this appoinment</p>
+                </div>
+                <div class="modal-footer bg-mustardlite">
+                    <button type="button" class="btn btn-primary">Yes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
