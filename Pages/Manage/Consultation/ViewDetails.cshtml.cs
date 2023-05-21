@@ -45,6 +45,26 @@ namespace Capstonep2.Pages.Manage.Consultation
 
         }
 
+
+                if (View.SymptomsEdit != null)
+                {
+                    foreach (var symptom in View.SymptomsEdit)
+                    {
+                        _context.ApptSymptoms?.Add(new ApptSymptom()
+                        {
+                            Id = Guid.NewGuid(),
+                            AppointmentId = View.ApptId,
+                            SymptomId = symptom
+                        });
+
+
+                    }
+                }
+                _context.SaveChanges();
+                OnGet(View.ApptId);
+            }
+        }
+
         [HttpGet("dahilan")]
         public JsonResult? OnGetPurposeedit(int pageIndex = 1, string? keyword = "", int pageSize = 10)
         {
