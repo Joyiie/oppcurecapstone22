@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Capstonep2.Migrations
 {
     [DbContext(typeof(DefaultDBContext))]
-    [Migration("20230519153106_init")]
+    [Migration("20230521152253_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,6 +30,12 @@ namespace Capstonep2.Migrations
                     b.Property<DateTime?>("EndTime")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<string>("FDescription")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PDescription")
+                        .HasColumnType("longtext");
+
                     b.Property<Guid?>("PatientID")
                         .HasColumnType("char(36)");
 
@@ -47,80 +53,6 @@ namespace Capstonep2.Migrations
                     b.HasIndex("PatientID");
 
                     b.ToTable("Appointments");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = new Guid("3ce371f9-dc79-4623-b84f-0b2fe7c99962"),
-                            EndTime = new DateTime(2023, 2, 2, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            PatientID = new Guid("5a7e7bc3-8816-41df-b44d-eeb60ae99b5b"),
-                            StartTime = new DateTime(2023, 2, 12, 11, 30, 0, 0, DateTimeKind.Unspecified),
-                            Status = 0,
-                            Visit = 1
-                        },
-                        new
-                        {
-                            ID = new Guid("7297d64f-7912-4e46-a663-e543af0102fb"),
-                            EndTime = new DateTime(22, 2, 23, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            PatientID = new Guid("5a7e7bc3-8816-41df-b44d-eeb60ae99b5b"),
-                            StartTime = new DateTime(2023, 2, 12, 11, 30, 0, 0, DateTimeKind.Unspecified),
-                            Status = 1,
-                            Visit = 1
-                        },
-                        new
-                        {
-                            ID = new Guid("a0d287bc-73e8-41b6-88f1-e7385ea7da7d"),
-                            EndTime = new DateTime(2023, 2, 2, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            PatientID = new Guid("5a7e7bc3-8816-41df-b44d-eeb60ae99b5b"),
-                            StartTime = new DateTime(2023, 2, 12, 11, 30, 0, 0, DateTimeKind.Unspecified),
-                            Status = 0,
-                            Visit = 1
-                        },
-                        new
-                        {
-                            ID = new Guid("e822435f-5110-465f-a276-c89ee9a5dc54"),
-                            EndTime = new DateTime(2023, 2, 2, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            PatientID = new Guid("5a7e7bc3-8816-41df-b44d-eeb60ae99b5b"),
-                            StartTime = new DateTime(2023, 2, 12, 11, 30, 0, 0, DateTimeKind.Unspecified),
-                            Status = 3,
-                            Visit = 1
-                        },
-                        new
-                        {
-                            ID = new Guid("c7d431a6-579b-4841-8629-2bbcb79a5e15"),
-                            EndTime = new DateTime(2023, 2, 12, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            PatientID = new Guid("8664a4bd-0ec6-4aaa-83e6-7d2bd0315b5a"),
-                            StartTime = new DateTime(2023, 2, 12, 11, 30, 0, 0, DateTimeKind.Unspecified),
-                            Status = 0,
-                            Visit = 0
-                        },
-                        new
-                        {
-                            ID = new Guid("20f20659-d4e3-466e-b2df-e6a6b1f62fab"),
-                            EndTime = new DateTime(2022, 2, 2, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            PatientID = new Guid("8664a4bd-0ec6-4aaa-83e6-7d2bd0315b5a"),
-                            StartTime = new DateTime(2022, 2, 12, 11, 30, 0, 0, DateTimeKind.Unspecified),
-                            Status = 0,
-                            Visit = 0
-                        },
-                        new
-                        {
-                            ID = new Guid("861c579e-bb80-4dea-b8f2-4b189cb6a362"),
-                            EndTime = new DateTime(2022, 2, 2, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            PatientID = new Guid("8664a4bd-0ec6-4aaa-83e6-7d2bd0315b5a"),
-                            StartTime = new DateTime(2022, 2, 12, 11, 30, 0, 0, DateTimeKind.Unspecified),
-                            Status = 1,
-                            Visit = 1
-                        },
-                        new
-                        {
-                            ID = new Guid("2222ed0f-aaea-45f3-8a72-f0ee3ed23a22"),
-                            EndTime = new DateTime(2022, 2, 2, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            PatientID = new Guid("8664a4bd-0ec6-4aaa-83e6-7d2bd0315b5a"),
-                            StartTime = new DateTime(2022, 2, 12, 11, 30, 0, 0, DateTimeKind.Unspecified),
-                            Status = 3,
-                            Visit = 1
-                        });
                 });
 
             modelBuilder.Entity("Capstonep2.Infrastructure.Domain.Models.ApptFinding", b =>
@@ -243,9 +175,6 @@ namespace Capstonep2.Migrations
                     b.Property<Guid?>("ConsultationRecordID")
                         .HasColumnType("char(36)");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("longtext");
-
                     b.Property<string>("FName")
                         .HasColumnType("longtext");
 
@@ -261,31 +190,26 @@ namespace Capstonep2.Migrations
                         new
                         {
                             ID = new Guid("efd1381a-4c3d-4260-aaf2-04a0a26591bc"),
-                            Description = "",
                             FName = "age-related macular degeneration"
                         },
                         new
                         {
                             ID = new Guid("672a4093-269e-47aa-879c-738cf2bf5e55"),
-                            Description = "",
                             FName = "cataract"
                         },
                         new
                         {
                             ID = new Guid("332d1fb4-35f1-48d8-ac19-f66472fce607"),
-                            Description = "",
                             FName = "diabetic"
                         },
                         new
                         {
                             ID = new Guid("629d1da5-bf42-4dd5-9eda-614ba1260f03"),
-                            Description = "",
                             FName = "retinopathy"
                         },
                         new
                         {
                             ID = new Guid("ab7f6ecf-7e82-4281-b90d-69f4ef72b66a"),
-                            Description = "",
                             FName = "glaucoma"
                         });
                 });
@@ -363,9 +287,6 @@ namespace Capstonep2.Migrations
                     b.Property<Guid?>("ConsultationRecordID")
                         .HasColumnType("char(36)");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("longtext");
-
                     b.Property<string>("GName")
                         .HasColumnType("longtext");
 
@@ -381,37 +302,31 @@ namespace Capstonep2.Migrations
                         new
                         {
                             ID = new Guid("3d588288-29d3-4f29-a6e4-45734f748986"),
-                            Description = "",
                             GName = "Azelastine eye drops for allergies (Optilast)"
                         },
                         new
                         {
                             ID = new Guid("71bd251b-43a1-4f19-a750-fc04e5e74876"),
-                            Description = "",
                             GName = "Atropine eye drops (Minims Atropine)"
                         },
                         new
                         {
                             ID = new Guid("974e4796-cbb3-4bd8-b0a5-f5886cb10d45"),
-                            Description = "",
                             GName = "Apraclonidine eye drops (Iopidine)"
                         },
                         new
                         {
                             ID = new Guid("35538073-8775-4efd-ab8a-c37479dc5109"),
-                            Description = "",
                             GName = "Antazoline and xylometazoline eye drops (Otrivine-Antistin)"
                         },
                         new
                         {
                             ID = new Guid("cf144c28-7bca-4140-91bd-57983d308c1c"),
-                            Description = "",
                             GName = "Aciclovir eye ointment."
                         },
                         new
                         {
                             ID = new Guid("744fa268-a8fd-4d38-a7af-239354d507b4"),
-                            Description = "",
                             GName = "Acetylcysteine for dry eyes (Ilube)"
                         });
                 });
@@ -726,15 +641,15 @@ namespace Capstonep2.Migrations
                     b.HasData(
                         new
                         {
-                            ID = new Guid("3aa10d8f-1af0-4ff6-8871-a13226034a3c"),
+                            ID = new Guid("6d106ed8-59b7-4a98-baeb-e8fc23c10f18"),
                             Key = "Password",
                             Type = "General",
                             UserID = new Guid("0352c124-f290-4f99-b1a5-e235cafcd836"),
-                            Value = "$2a$11$KrZwX.jWAf3rYEZNyO3MY.ZQRL/SoWMatj3/zKMZqYINO2J2MJKl6"
+                            Value = "$2a$11$eHSuQYWLkuTA8IRxxt.cduhy0r6lWhbvg85fDHOnjlWBg6BzYMeO."
                         },
                         new
                         {
-                            ID = new Guid("8bdf99f5-e9b4-40ab-aa11-822a2cf14f43"),
+                            ID = new Guid("93baf46a-dab2-49b9-b49e-445363f55632"),
                             Key = "IsActive",
                             Type = "General",
                             UserID = new Guid("0352c124-f290-4f99-b1a5-e235cafcd836"),
@@ -742,7 +657,7 @@ namespace Capstonep2.Migrations
                         },
                         new
                         {
-                            ID = new Guid("a64d5f71-6f47-4738-b938-6b39c989b764"),
+                            ID = new Guid("ce0ef5f4-8e17-4dcf-9202-5a90ff08cc4a"),
                             Key = "LoginRetries",
                             Type = "General",
                             UserID = new Guid("0352c124-f290-4f99-b1a5-e235cafcd836"),
@@ -750,15 +665,15 @@ namespace Capstonep2.Migrations
                         },
                         new
                         {
-                            ID = new Guid("18fc9c00-b936-4fa3-88fb-bad7346750c1"),
+                            ID = new Guid("cdf9f564-aaa4-4226-820f-819e69bd0779"),
                             Key = "Password",
                             Type = "General",
                             UserID = new Guid("d7dbd16f-1c71-4415-a147-22a2b428bf95"),
-                            Value = "$2a$11$XNzVbSTmzCt1bFdASM2AJOds1bKjR3N6YaWozFs3iPvroAtn9bvg6"
+                            Value = "$2a$11$I.6j4QjM3ITqJUgLFBFw/OO.59XpPrydKJIQNN/tGCpyD8Mw5nMeu"
                         },
                         new
                         {
-                            ID = new Guid("9783fe9e-82e2-49c5-9c33-7f56fcee2ad4"),
+                            ID = new Guid("edcfedbe-8ca4-4820-b561-f12213c46d52"),
                             Key = "IsActive",
                             Type = "General",
                             UserID = new Guid("d7dbd16f-1c71-4415-a147-22a2b428bf95"),
@@ -766,7 +681,7 @@ namespace Capstonep2.Migrations
                         },
                         new
                         {
-                            ID = new Guid("7144173d-473f-47c7-a228-efe643158786"),
+                            ID = new Guid("4b199242-5b91-48d0-a2cf-3425a5639e0d"),
                             Key = "LoginRetries",
                             Type = "General",
                             UserID = new Guid("d7dbd16f-1c71-4415-a147-22a2b428bf95"),
@@ -774,15 +689,15 @@ namespace Capstonep2.Migrations
                         },
                         new
                         {
-                            ID = new Guid("1d8cd6ca-8237-431e-bf31-156611bd13bd"),
+                            ID = new Guid("e8deb6f5-f170-4b91-ac4c-18a31c78d0f0"),
                             Key = "Password",
                             Type = "General",
                             UserID = new Guid("1bd5f519-b891-4491-9a7c-a86cd0c2a15e"),
-                            Value = "$2a$11$b2hMko7iNkx7vUkxOG/YT.PoTxnHlpr5z2fcvaXRzKXo/GWu/u5pK"
+                            Value = "$2a$11$RzuJmfq.Koasj4RpeOVl8eSnBPweLdbH47tyh/ulZOp4ms08Auf4O"
                         },
                         new
                         {
-                            ID = new Guid("2bc9160d-f5c7-4744-9367-eb0bf5df0db5"),
+                            ID = new Guid("ac95e264-1de1-4e4f-b86f-00bdbbf198a3"),
                             Key = "IsActive",
                             Type = "General",
                             UserID = new Guid("1bd5f519-b891-4491-9a7c-a86cd0c2a15e"),
@@ -790,7 +705,7 @@ namespace Capstonep2.Migrations
                         },
                         new
                         {
-                            ID = new Guid("d4ba64f1-b7a8-48e8-9e52-954c038c5e7b"),
+                            ID = new Guid("ea6ce764-d2aa-469c-80f5-b0df4d781221"),
                             Key = "LoginRetries",
                             Type = "General",
                             UserID = new Guid("1bd5f519-b891-4491-9a7c-a86cd0c2a15e"),
@@ -798,15 +713,15 @@ namespace Capstonep2.Migrations
                         },
                         new
                         {
-                            ID = new Guid("239aac26-7b2d-4f93-be6a-b2d7d6f519e0"),
+                            ID = new Guid("754d6fef-c5b3-4893-be82-d386db72d021"),
                             Key = "Password",
                             Type = "General",
                             UserID = new Guid("00acfb7f-6c90-459a-b53f-bf73ddac85b4"),
-                            Value = "$2a$11$TO5EPCXzMBOefok73NkDKeecj/EMQBSQe/lUiBcxmVbFWvzIze9Zq"
+                            Value = "$2a$11$a9I/7jOR/4reVn6D68ZnAu9cVx7fZ6QEmBHZxvglRnNd8UBxEiiu."
                         },
                         new
                         {
-                            ID = new Guid("f03a6ac4-9d05-4ff4-b562-d04c9eeb57cf"),
+                            ID = new Guid("b2223936-bb8b-4df4-a725-3dee85d65ca7"),
                             Key = "IsActive",
                             Type = "General",
                             UserID = new Guid("00acfb7f-6c90-459a-b53f-bf73ddac85b4"),
@@ -814,7 +729,7 @@ namespace Capstonep2.Migrations
                         },
                         new
                         {
-                            ID = new Guid("0df0dcc9-e918-4cfd-af9a-b0c6a4c35d6a"),
+                            ID = new Guid("93dbf407-d9cc-4708-8c74-fa32b3375786"),
                             Key = "LoginRetries",
                             Type = "General",
                             UserID = new Guid("00acfb7f-6c90-459a-b53f-bf73ddac85b4"),
@@ -822,15 +737,15 @@ namespace Capstonep2.Migrations
                         },
                         new
                         {
-                            ID = new Guid("b5655b58-ce92-426e-91a9-0c8107102b7b"),
+                            ID = new Guid("11d6b1e6-4f38-49dd-8d72-bfaac49e742b"),
                             Key = "Password",
                             Type = "General",
                             UserID = new Guid("7e5e4f74-9902-43da-9974-4b2a08814398"),
-                            Value = "$2a$11$MV3PcC1Vo8zx.aa84TTlhOnYcVoTAHQVDVfKminwJBd8YPLyUhBHW"
+                            Value = "$2a$11$a2em.AzzWWzIKh6gzqwFZeukxknl0AtCE1.WdqTgeDS3okPTSaML6"
                         },
                         new
                         {
-                            ID = new Guid("9d05108b-101b-49eb-b694-81b0b8e24e7a"),
+                            ID = new Guid("2a73ece9-2473-45a8-934a-1fad967be4f2"),
                             Key = "IsActive",
                             Type = "General",
                             UserID = new Guid("7e5e4f74-9902-43da-9974-4b2a08814398"),
@@ -838,7 +753,7 @@ namespace Capstonep2.Migrations
                         },
                         new
                         {
-                            ID = new Guid("5b1ce5b5-9494-4be0-95e0-e3f1dbabb0f2"),
+                            ID = new Guid("f1205ce1-ba86-41b0-a688-0b5cd05db839"),
                             Key = "LoginRetries",
                             Type = "General",
                             UserID = new Guid("7e5e4f74-9902-43da-9974-4b2a08814398"),
@@ -869,31 +784,31 @@ namespace Capstonep2.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("d9150c2b-50fb-44a3-8ae3-36fdc1854ef8"),
+                            Id = new Guid("341afcc4-ebdf-4403-ae6a-38d83d280c81"),
                             RoleID = new Guid("2afa881f-e519-4e67-a841-e4a2630e8a2a"),
                             UserID = new Guid("0352c124-f290-4f99-b1a5-e235cafcd836")
                         },
                         new
                         {
-                            Id = new Guid("657dd1b2-db87-45dd-b719-be89559d8c94"),
+                            Id = new Guid("05f046a1-34a1-4792-bfae-5bdcde4db044"),
                             RoleID = new Guid("2afa881f-e519-4e67-a841-e4a2630e8a2a"),
                             UserID = new Guid("d7dbd16f-1c71-4415-a147-22a2b428bf95")
                         },
                         new
                         {
-                            Id = new Guid("59f01725-b207-4434-a818-823102f89595"),
+                            Id = new Guid("993bb3fe-3735-44a5-a497-f62b4601d1b6"),
                             RoleID = new Guid("54f00f70-72b8-4d34-a953-83321ff6b101"),
                             UserID = new Guid("1bd5f519-b891-4491-9a7c-a86cd0c2a15e")
                         },
                         new
                         {
-                            Id = new Guid("cb2e25a3-bfd3-4861-b90d-6c774260fc00"),
+                            Id = new Guid("7a109e76-06f6-4deb-bd12-e999816b2181"),
                             RoleID = new Guid("54f00f70-72b8-4d34-a953-83321ff6b101"),
                             UserID = new Guid("00acfb7f-6c90-459a-b53f-bf73ddac85b4")
                         },
                         new
                         {
-                            Id = new Guid("305f0f52-4bc9-4a02-a5cb-086c43f1c22c"),
+                            Id = new Guid("af51f51a-6037-4881-afa5-e26af433b68a"),
                             RoleID = new Guid("2afa881f-e519-4e67-a841-e4a2630e8a2a"),
                             UserID = new Guid("7e5e4f74-9902-43da-9974-4b2a08814398")
                         });

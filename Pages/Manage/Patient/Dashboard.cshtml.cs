@@ -282,14 +282,15 @@ namespace Capstonep2.Pages.Manage.Patient
             {
                 ID = View.ID,
                 PatientID = patientId,
+                Visit = Infrastructure.Domain.Models.Enums.Visit.Appointment,
                 StartTime = View.StartTime,
                 EndTime = endTime,
-
-
+                PDescription = "",
+                FDescription = ""
 
             };
 
-            _context?.Appointments?.Add(appointment);
+           
             _context?.Appointments?.Add(appointment);
             if (View.PurposeList != null)
             {

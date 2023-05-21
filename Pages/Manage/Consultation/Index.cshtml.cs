@@ -73,14 +73,13 @@ namespace Capstonep2.Pages.Manage.Consultation
                     ID = Guid.NewGuid(),
                     ConsultationRecordID = CRGuid,
                     GName = View.PTags,
-                    Description = View.PDescription
+                    
                 };
                 Finding finding = new Finding()
                 {
                     ID = Guid.NewGuid(),
                     ConsultationRecordID = CRGuid,
-                    FName = View.FTags,
-                    Description = View.FDescription
+                    
                 };
 
                 var appointment = _context?.Appointments?.FirstOrDefault(a => a.ID == Guid.Parse(View.AppointmentId));

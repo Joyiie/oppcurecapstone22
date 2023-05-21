@@ -11,26 +11,30 @@
     <div class="row justify-content-center">
         <div class="col-autos">
             <div class="card">
-                <h2>Patient</h2>
+                <div class="card-header bg-mustardlite">
+                    <h3 class="text-center">Patient Information</h3>
+                </div>
 
-                <div class="card-body bg-mustardlite">
+                <div class="card-body ">
                     <table class="table table-striped">
+
                         <tr>
-                            <th>Name:</th>
-                            <td>@ViewData["firstname"] @ViewData["middlename"] @ViewData["lastname"]</td>
+                            <th>Name: </th>
+                            <td>@Model.View.Appointment.Patient.FirstName @Model.View.Appointment.Patient.MiddleName @Model.View.Appointment.Patient.LastName </td>
                         </tr>
                         <tr>
                             <th>Gender:</th>
-                            <td>@ViewData["gender"]</td>
+                            <td>@Model.View.Appointment.Patient.Gender</td>
                         </tr>
                         <tr>
                             <th>Birthdate:</th>
-                            <td>@ViewData["birthdate"]</td>
+                            <td>@Model.View.Appointment.Patient.BirthDate</td>
                         </tr>
                         <tr>
                             <th>Address:</th>
-                            <td>@ViewData["address"]</td>
+                            <td>@Model.View.Appointment.Patient.Address</td>
                         </tr>
+
                     </table>
 
 
@@ -43,40 +47,61 @@
 
 <div class="container">
     <div class="card">
-        <h2> Details</h2>
-        <div class="card-body bg-mustardlite">
-            <div class="row">
-                <label> Date And Time :</label>
-            </div>
+        <div class="card-header bg-mustardlite">
+            <h3 class="text-center">Appoinment Details</h3>
+        </div>
+        <div class="card-body ">
 
-            <div class="row">
-                <label>Status:</label>
-            </div>
-            <div class="row">
-                <label>Symptoms:</label>
-            </div>
-            <div class="row">
-                <label>Purpose Of Visit:</label>
-            </div>
+            <table class="table table-striped">
+
+                <tr>
+                    <th>Date And Time: </th>
+                    <td> @Model.View.Appointment.StartTime - @Model.View.Appointment.EndTime </td>
+                </tr>
+                <tr>
+                    <th>Status:</th>
+                    <td>@Model.View.Appointment.Status</td>
+                </tr>
+                <tr>
+                    <th>Syptoms:</th>
+                    <td>@String.Join(",",Model.View.SymptomsList)</td>
+                </tr>
+                <tr>
+                    <th>Purpose Of Visit:</th>
+                    <td>@String.Join(",",Model.View.PurposesList)</td>
+                </tr>
+
+            </table>
         </div>
     </div>
 </div>
 <div class="container">
     <div class="card">
-        <h2>Consultation</h2>
-        <div class="card-body bg-mustardlite">
-            <div class="row">
-                <label>Findings:</label>
-            </div>
-            <div class="row">
-                <label>Descriptions:</label>
-            </div>
-            <div class="row">
-                <label>Prescription:</label>
-            </div>
-            <div class="row">
-                <label>Description:</label>
-            </div>
+        
+        <div class="card-header bg-mustardlite">
+            <h2 class="text-center">Consultation Details</h2>
+        </div>
+        <div class="card-body ">
+            <table class="">
+
+                <tr>
+                    <th>Findings: </th>
+                    <td> @String.Join(",",Model.View.FindingsList) </td>
+                </tr>
+                <tr>
+                    <th>Finding Descriptions:</th>
+                    <td>@Model.View.Appointment.FDescription</td>
+                </tr>
+                <tr>
+                    <th>Presciption:</th>
+                    <td>@String.Join(",",Model.View.PrescriptionsList)</td>
+                </tr>
+                <tr>
+                    <th>Prescription Descriptions:</th>
+                    <td>@Model.View.Appointment.PDescription</td>
+                </tr>
+
+            </table>
 
         </div>
 
@@ -87,9 +112,60 @@
 
 <div class="container">
 
-    <a href="~/manage/patient/Editappt?" class="btn btn-primary">
-        <i class="fa fa-pencil">Edit Appointment </i>
-    </a>
+
+    <button class="btn btn-danger" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEdit">
+        Edit Appointment
+    </button>
+
+    <div class="collapse" id="collapseEdit">
+        <div class="card">
+            <div class="card-header">
+                <p>Edit appointment</p>
+            </div>
+            <div class="card-body bg-mustardlite">
+                <form method="Post" asp-page-handler="Apptsedit">
+                    <label>Symptoms</label>
+                    <div class="form-group justify-content-center">
+                        <select class="form-control selectSintomas" name="View.SymptomsEdit" multiple>
+                            @{
+                                if (Model.View.Symptoms != null && Model.View.Symptoms.Count() > 0)
+                                {
+                                    foreach (var symptom in Model.View.Symptoms)
+                                    {
+                                        <option value="@symptom.Id">@symptom.Name</option>
+                                    }
+                                }
+                            }
+                        </select>
+                    </div>
+
+
+
+                    <label>Purpose Of Visit</label>
+                    <div class="form-group justify-content-center w-100">
+                        <select class="form-control selectDahilan w-100" name="View.PurposesEdit" multiple>
+                            @{
+                                if (Model.View.Purposes != null && Model.View.Purposes.Count() > 0)
+                                {
+                                    foreach (var purpose in Model.View.Purposes)
+                                    {
+                                        <option value="@purpose.Id">@purpose.Name</option>
+                                    }
+                                }
+                            }
+                        </select>
+                    </div>
+                    <input type="hidden" asp-for="View.ApptId" value="@Model.View.ApptId"/>
+                    <div class="form-group alert-danger">
+                        @Html.ValidationSummary()
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancel">
         <i class="fa fa-pencil">Cancel Appointment</i>
@@ -107,8 +183,11 @@
                     <p>Are you sure you want to cancel this appoinment</p>
                 </div>
                 <div class="modal-footer bg-mustardlite">
-                    <button type="button" class="btn btn-primary">Yes</button>
+                   <form method="Post" asp-page-handler="Canceled">
+                   <input type="hidden" class="form-control" asp-for="View.ApptId" value="@Model.View.ApptId">
+                    <button type="submit" class="btn btn-primary">Yes</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    </form>
                 </div>
 
             </div>
@@ -116,6 +195,41 @@
     </div>
 
 </div>
+
+@section Scripts{
+    <script>
+        $('.selectSintomas').select2({
+            ajax: {
+                url: '?handler=symptomedit',
+                data: function (params) {
+                    var query = {
+                        keyword: params.term,
+                        page: params.page || 1
+                    }
+                    return query;
+                },
+                headers: { "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val() },
+            }
+        });
+    </script>
+    <script>
+        $('.selectDahilan').select2({
+            ajax: {
+                url: '?handler=purposeedit',
+                data: function (params) {
+                    var query = {
+                        keyword: params.term,
+                        page: params.page || 1
+                    }
+                    return query;
+                },
+                headers: { "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val() },
+            }
+        });
+    </script>
+}
+
+
 
 
 

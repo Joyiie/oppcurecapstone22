@@ -64,64 +64,160 @@ namespace Capstonep2.Pages.Manage.Admin
 
             }
 
-
+          View.PatientID = id;
             return Page();
         }
 
-        public IActionResult OnPostNewRecord()
+        public void OnPostRecord()
         {
-            Guid NewR = Guid.NewGuid();
-            Guid CRGuid = Guid.NewGuid();
 
-            ConsultationRecord consultation = new ConsultationRecord()
-            {
-                ID = CRGuid,
-                AppointmentID = NewR,
-                PatientID = View.Patient.ID,
-            };
-
+            Guid? newId = Guid.NewGuid();
+            DateTime? endTime = View.StartTime.Value.AddHours(1);
             Appointment appointment = new Appointment()
             {
-                ID = NewR,
-
-
+                ID = newId,
+                PatientID = View.PatientID,
+                Visit = Infrastructure.Domain.Models.Enums.Visit.WalkIn,
                 StartTime = View.StartTime,
-                EndTime = View.StartTime.Value.AddHours(1),
-
-                PatientID = View.Patient.ID
-
-
-            };
-
-            Finding finding = new Finding()
-            {
-                ID = Guid.NewGuid(),
-                ConsultationRecordID = CRGuid,
-                FName = View.FTags,
-                Description = View.FDescription
+                EndTime = endTime,
+                PDescription = View.FDesc,
+                FDescription = View.PDesc
 
             };
-            Prescription prescription = new Prescription()
-            {
-                ID = Guid.NewGuid(),
-                ConsultationRecordID = CRGuid,
-                GName = View.PTags,
-                Description = View.PDescription,
-
-            };
-
-
-            _context?.ConsultationRecords?.Add(consultation);
             _context?.Appointments?.Add(appointment);
-            _context?.Findings?.Add(finding);
-            _context?.Prescriptions?.Add(prescription);
+
+            if (View.SList != null)
+            {
+                foreach (var symptom in View.SList)
+                {
+
+
+                    _context?.ApptSymptoms?.Add(new ApptSymptom()
+                    {
+                        Id = Guid.NewGuid(),
+                        AppointmentId = newId,
+                        SymptomId = symptom
+
+                    });
+
+
+
+
+                }
+
+            }
+
+            if (View.VList != null)
+            {
+                foreach (var purpose in View.VList)
+                {
+
+
+                    _context?.ApptPurposes?.Add(new ApptPurpose()
+                    {
+                        Id = Guid.NewGuid(),
+                        AppointmetId = newId,
+                        PurposeId = purpose
+
+                    });
+
+
+
+
+                }
+
+            }
+
+
+
+
+            if (View.PList != null)
+            {
+                foreach (var prescription in View.PList)
+                {
+
+
+                    _context?.ApptPrecriptions?.Add(new ApptPrecription()
+                    {
+                        Id = Guid.NewGuid(),
+                        AppointmentId = newId,
+                        PrescriptionId = prescription
+
+                    });
+
+
+
+
+                }
+
+            }
+
+            if (View.FList != null)
+            {
+                foreach (var finding in View.FList)
+                {
+                    _context?.ApptFindings.Add(new ApptFinding()
+                    {
+                        Id = Guid.NewGuid(),
+                        AppointmentId = newId,
+                        FindingId = finding,
+                        
+                    });
+
+                }
+            }
+
             _context?.SaveChanges();
 
-            return RedirectPermanent("~/manage/admin/dashboard");
-
+            OnGet(View.PatientID);
         }
 
 
+        [HttpGet("purpose")]
+        public JsonResult? OnGetPurpose(int pageIndex = 1, string? keyword = "", int pageSize = 10)
+        {
+            return new JsonResult(_context.Purposes!.Select(a => new LookupDto.Result()
+            {
+                Id = a.Id.ToString(),
+                Text = a.Name ?? ""
+            })
+            .AsQueryable()
+            .GetLookupPaged(pageIndex, pageSize));
+        }
+
+        [HttpGet("symptom")]
+        public JsonResult? OnGetSymptom(int pageIndex = 1, string? keyword = "", int pageSize = 10)
+        {
+            return new JsonResult(_context.Symptoms!.Select(a => new LookupDto.Result()
+            {
+                Id = a.Id.ToString(),
+                Text = a.Name ?? ""
+            })
+            .AsQueryable()
+            .GetLookupPaged(pageIndex, pageSize));
+        }
+        [HttpGet("finding")]
+        public JsonResult? OnGetFinding(int pageIndex = 1, string? keyword = "", int pageSize = 10)
+        {
+            return new JsonResult(_context.Findings!.Select(a => new LookupDto.Result()
+            {
+                Id = a.ID.ToString(),
+                Text = a.FName ?? ""
+            })
+            .AsQueryable()
+            .GetLookupPaged(pageIndex, pageSize));
+        }
+        [HttpGet("pres")]
+        public JsonResult? OnGetPres(int pageIndex = 1, string? keyword = "", int pageSize = 10)
+        {
+            return new JsonResult(_context.Prescriptions!.Select(a => new LookupDto.Result()
+            {
+                Id = a.ID.ToString(),
+                Text = a.GName ?? ""
+            })
+            .AsQueryable()
+            .GetLookupPaged(pageIndex, pageSize));
+        }
 
 
 
@@ -129,17 +225,26 @@ namespace Capstonep2.Pages.Manage.Admin
 
         public class ViewModel : UserViewModel
         {
+            public Guid? PatientID { get; set; }
+            public List<Guid>? SList { get; set; }
+            public List<Guid>? VList { get; set; }
+            public List<Guid>? FList { get; set; }
+            public List<Guid>? PList { get; set; }
+            public Guid? ApptId { get; set; }
             [ForeignKey("PatientID")]
             public Infrastructure.Domain.Models.Patient? Patient { get; set; }
             public List<Finding>? Findings { get; set; }
             public List<Prescription>? Prescriptions { get; set; }
             public List<ConsultationRecord>? ConsultationRecords { get; set; }
             public List<Appointment>? Appointments { get; set; }
+            public List<Symptom>? Symptoms { get; set; }
+            public List<Infrastructure.Domain.Models.Purpose>? Purposes { get; set; }
 
             public string? FTags { get; set; }
             public string? FDescription { get; set; }
 
-
+            public string? FDesc { get; set; }
+            public string? PDesc { get; set; }
             public string? PTags { get; set; }
             public string? PDescription { get; set; }
             public DateTime? StartTime { get; set; }

@@ -14,8 +14,9 @@ namespace Capstonep2.Infrastructure.Domain.Models
         public Enums.Status Status { get; set; }
         public Enums.Visit Visit { get; set; }
 
+        public string? FDescription { get; set; }
+        public string? PDescription { get; set; }
 
-        
         [ForeignKey("PatientID")]
         public Patient? Patient { get; set; }
 

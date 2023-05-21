@@ -53,37 +53,37 @@ namespace Capstonep2.Infrastructure.Domain
             {
                 ID = Guid.Parse("3d588288-29d3-4f29-a6e4-45734f748986"),
                 GName = "Azelastine eye drops for allergies (Optilast)",
-                Description = ""
+                
             });
             prescriptions.Add(new Prescription()
             {
                 ID = Guid.Parse("71bd251b-43a1-4f19-a750-fc04e5e74876"),
-                GName = "Atropine eye drops (Minims Atropine)",
-                Description = ""
+                GName = "Atropine eye drops (Minims Atropine)"
+               
             });
             prescriptions.Add(new Prescription()
             {
                 ID = Guid.Parse("974e4796-cbb3-4bd8-b0a5-f5886cb10d45"),
-                GName = "Apraclonidine eye drops (Iopidine)",
-                Description = ""
+                GName = "Apraclonidine eye drops (Iopidine)"
+               
             });
             prescriptions.Add(new Prescription()
             {
                 ID = Guid.Parse("35538073-8775-4efd-ab8a-c37479dc5109"),
-                GName = "Antazoline and xylometazoline eye drops (Otrivine-Antistin)",
-                Description = ""
+                GName = "Antazoline and xylometazoline eye drops (Otrivine-Antistin)"
+               
             });
             prescriptions.Add(new Prescription()
             {
                 ID = Guid.Parse("cf144c28-7bca-4140-91bd-57983d308c1c"),
-                GName = "Aciclovir eye ointment.",
-                Description = ""
+                GName = "Aciclovir eye ointment."
+                
             });
             prescriptions.Add(new Prescription()
             {
                 ID = Guid.Parse("744fa268-a8fd-4d38-a7af-239354d507b4"),
-                GName = "Acetylcysteine for dry eyes (Ilube)",
-                Description = ""
+                GName = "Acetylcysteine for dry eyes (Ilube)"
+                
             });
 
             //
@@ -91,32 +91,32 @@ namespace Capstonep2.Infrastructure.Domain
             findings.Add(new Finding()
             {
                 ID = Guid.Parse("efd1381a-4c3d-4260-aaf2-04a0a26591bc"),
-                FName = "age-related macular degeneration",
-                Description = ""
+                FName = "age-related macular degeneration"
+              
             });
             findings.Add(new Finding()
             {
                 ID = Guid.Parse("672a4093-269e-47aa-879c-738cf2bf5e55"),
-                FName = "cataract",
-                Description = ""
+                FName = "cataract"
+                
             });
             findings.Add(new Finding()
             {
                 ID = Guid.Parse("332d1fb4-35f1-48d8-ac19-f66472fce607"),
-                FName = "diabetic",
-                Description = ""
+                FName = "diabetic"
+                
             });
             findings.Add(new Finding()
             {
                 ID = Guid.Parse("629d1da5-bf42-4dd5-9eda-614ba1260f03"),
-                FName = "retinopathy",
-                Description = ""
+                FName = "retinopathy"
+                
             });
             findings.Add(new Finding()
             {
                 ID = Guid.Parse("ab7f6ecf-7e82-4281-b90d-69f4ef72b66a"),
-                FName = "glaucoma",
-                Description = ""
+                FName = "glaucoma"
+                
 
             });
 
@@ -354,67 +354,11 @@ namespace Capstonep2.Infrastructure.Domain
             // user2
 
             //appts2
-            appointments.Add(new Appointment()
-            {
-                ID = Guid.Parse("3ce371f9-dc79-4623-b84f-0b2fe7c99962"),
-                PatientID = Guid.Parse("5a7e7bc3-8816-41df-b44d-eeb60ae99b5b"),
-                StartTime = DateTime.Parse("12-02-23 11:30"),
-                EndTime = DateTime.Parse("02-02-23 12:00"),
-                Status = Models.Enums.Status.Pending,
-                Visit = Models.Enums.Visit.Appointment
-              
+       
+          
 
-
-            });
-            appointments.Add(new Appointment()
-            {
-                ID = Guid.Parse("7297d64f-7912-4e46-a663-e543af0102fb"),
-                PatientID = Guid.Parse("5a7e7bc3-8816-41df-b44d-eeb60ae99b5b"),
-                StartTime = DateTime.Parse("12-02-23 11:30"),
-                EndTime = DateTime.Parse("022-02-23 12:00"),
-
-                Status = Models.Enums.Status.Cancelled,
-                Visit = Models.Enums.Visit.Appointment
-              
-
-            });
-
-            appointments.Add(new Appointment()
-            {
-                ID = Guid.Parse("a0d287bc-73e8-41b6-88f1-e7385ea7da7d"),
-                PatientID = Guid.Parse("5a7e7bc3-8816-41df-b44d-eeb60ae99b5b"),
-                StartTime = DateTime.Parse("12-02-23 11:30"),
-                EndTime = DateTime.Parse("02-02-23 12:00"),
-
-                Status = Models.Enums.Status.Pending,
-                Visit = Models.Enums.Visit.Appointment
-                
-
-                
-
-            });
-            appointments.Add(new Appointment()
-            {
-                ID = Guid.Parse("e822435f-5110-465f-a276-c89ee9a5dc54"),
-                PatientID = Guid.Parse("5a7e7bc3-8816-41df-b44d-eeb60ae99b5b"),
-                StartTime = DateTime.Parse("12-02-23 11:30"),
-                EndTime = DateTime.Parse("02-02-23 12:00"),
-
-                Status = Models.Enums.Status.NoShow,
-                Visit = Models.Enums.Visit.Appointment
-               
-                
-
-            });
-            //appts2
-
-            //cr2
-
-            //cr
-
-
-
-            //finding2
+          
+           
 
             patients.Add(new Patient()
             {
@@ -427,59 +371,6 @@ namespace Capstonep2.Infrastructure.Domain
 
                 Gender = Models.Enums.Gender.Male
             });
-
-            appointments.Add(new Appointment()
-            {
-                ID = Guid.Parse("c7d431a6-579b-4841-8629-2bbcb79a5e15"),
-                PatientID = Guid.Parse("8664a4bd-0ec6-4aaa-83e6-7d2bd0315b5a"),
-                StartTime = DateTime.Parse("12-02-23 11:30"),
-                EndTime = DateTime.Parse("12-02-23 12:00"),
-                Visit = Models.Enums.Visit.WalkIn,
-                Status = Models.Enums.Status.Pending
-                
-
-            });
-
-            appointments.Add(new Appointment()
-            {
-                ID = Guid.Parse("20f20659-d4e3-466e-b2df-e6a6b1f62fab"),
-                PatientID = Guid.Parse("8664a4bd-0ec6-4aaa-83e6-7d2bd0315b5a"),
-                StartTime = DateTime.Parse("12-02-22 11:30"),
-                EndTime = DateTime.Parse("02-02-22 12:00"),
-
-                Status = Models.Enums.Status.Pending,
-                Visit = Models.Enums.Visit.WalkIn
-               
-            });
-
-            appointments.Add(new Appointment()
-            {
-                ID = Guid.Parse("861c579e-bb80-4dea-b8f2-4b189cb6a362"),
-                PatientID = Guid.Parse("8664a4bd-0ec6-4aaa-83e6-7d2bd0315b5a"),
-                StartTime = DateTime.Parse("12-02-22 11:30"),
-                EndTime = DateTime.Parse("02-02-22 12:00"),
-
-                Status = Models.Enums.Status.Cancelled,
-                Visit = Models.Enums.Visit.Appointment
-          
-
-            });
-
-            appointments.Add(new Appointment()
-            {
-                ID = Guid.Parse("2222ed0f-aaea-45f3-8a72-f0ee3ed23a22"),
-                PatientID = Guid.Parse("8664a4bd-0ec6-4aaa-83e6-7d2bd0315b5a"),
-                StartTime = DateTime.Parse("12-02-22 11:30"),
-                EndTime = DateTime.Parse("02-02-22 12:00"),
-                Visit = Models.Enums.Visit.Appointment,
-                Status = Models.Enums.Status.NoShow
-                
-            });
-
-
-
-
-
 
 
             users.Add(new User()
